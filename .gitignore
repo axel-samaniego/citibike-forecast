@@ -1,0 +1,6 @@
+.venv/
+.idea/
+__pycache__/
+*.parquet
+*.log
+.DS_Store
