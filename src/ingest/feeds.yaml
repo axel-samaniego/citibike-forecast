@@ -1,0 +1,31 @@
+feeds:
+  - name: citibike_station_status
+    url: https://gbfs.lyft.com/gbfs/2.3/bkn/en/station_status.json
+    type: citibike
+    period: 30
+    topic: citibike.station_status
+  - name: citibike_station_info
+    url: https://gbfs.lyft.com/gbfs/2.3/bkn/en/station_information.json
+    type: citibike
+    period: 604800
+    topic: citibike.station_info
+  - name: weather_forecast
+    url: "https://api.weather.gov/zones/land/{zone}/forecast"
+    type: weather
+    period: 600
+    topic: weather.forecast
+  - name: mta_subway_lines
+    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-{line}
+    type: mta
+    period: 60
+    topic: mta.subway.lines
+  - name: mta_subway_alerts
+    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts
+    type: mta
+    period: 300
+    topic: mta.subway.alerts
+  - name: mta_bus_alerts
+    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fbus-alerts
+    type: mta
+    period: 300
+    topic: mta.bus.alerts
