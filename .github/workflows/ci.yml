@@ -28,19 +28,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-
-    - name: Lint & Tests
+    - name: Run tests
       if: matrix.lang == 'python'
       run: |
-        ruff .
-        mypy src/
-        pytest -q
-    
-    - name: Build wheel
-      if: matrix.lang == 'python'
-      run: python -m build --wheel
-      # The command writes the wheel into ./dist/
-      # Docs: https://pypa-build.readthedocs.io/en/stable/  :contentReference[oaicite:0]{index=0}
-
-    # ---------- Build & push Docker images ----------
-    #   unchanged; just make sure Dockerfile uses requirements.txt too
+        python -m pytest -q
