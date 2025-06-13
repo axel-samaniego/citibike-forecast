@@ -14,18 +14,18 @@ feeds:
     type: weather
     period: 600
     topic: weather.forecast
-  - name: mta_subway_lines
-    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-{line}
-    type: mta
-    period: 60
-    topic: mta.subway.lines
-  - name: mta_subway_alerts
-    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts
-    type: mta
-    period: 300
-    topic: mta.subway.alerts
-  - name: mta_bus_alerts
-    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fbus-alerts
-    type: mta
-    period: 300
-    topic: mta.bus.alerts
+  # - name: mta_subway_lines
+  #   url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-{line}
+  #   type: mta
+  #   period: 60
+  #   topic: mta.subway.lines
+  # - name: mta_subway_alerts
+  #   url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts
+  #   type: mta
+  #   period: 300
+  #   topic: mta.subway.alerts
+  # - name: mta_bus_alerts
+  #   url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fbus-alerts
+  #   type: mta
+  #   period: 300
+  #   topic: mta.bus.alerts
