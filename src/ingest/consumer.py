@@ -20,6 +20,9 @@ async def consume():
         "citibike.station_status",  # Add all topics you want to consume
         "citibike.station_info",
         "weather.forecast",
+        "mta.subway.lines",
+        "mta.subway.alerts",
+        "mta.bus.alerts",
         bootstrap_servers="192.168.1.100:9092",  # Replace with your broker's IP
         group_id="my-group",
     )

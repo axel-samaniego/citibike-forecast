@@ -1,4 +1,4 @@
-from fetchers import citibike, weather
+from fetchers import citibike, weather, mta
 from aiohttp import ClientSession
 import yaml
 from aiokafka import AIOKafkaProducer
@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 FETCHER_MAP = {
     "citibike": citibike.poll,
     "weather": weather.poll,
+    "mta": mta.poll,
 }
 
 
