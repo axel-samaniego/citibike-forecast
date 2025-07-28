@@ -4,7 +4,7 @@ from aiohttp import ClientSession
 import asyncio
 import logging
 from google.transit import gtfs_realtime_pb2
-from protobut_to_dict import protobuf_to_dict
+from protobuf_to_dict import protobuf_to_dict
 
 logger = logging.getLogger(__name__)
 

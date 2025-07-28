@@ -3,7 +3,10 @@ import asyncio
 import json
 import gzip
 import logging
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -12,6 +15,10 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+
+KAFKA_BROKER = os.getenv("KAFKA_BROKER")
+GROUP_ID = os.getenv("KAFKA_GROUP_ID")
+SAVE_PATH = os.getenv("DATA_SAVE_PATH")
 
 
 async def consume():
@@ -23,8 +30,8 @@ async def consume():
         "mta.subway.lines",
         "mta.subway.alerts",
         "mta.bus.alerts",
-        bootstrap_servers="192.168.1.100:9092",  # Replace with your broker's IP
-        group_id="my-group",
+        bootstrap_servers=KAFKA_BROKER,  # Replace with your broker's IP
+        group_id=GROUP_ID,
     )
     await consumer.start()
     try:
@@ -34,8 +41,9 @@ async def consume():
                 decompressed = gzip.decompress(msg.value)
                 # Parse the JSON data
                 data = json.loads(decompressed)
-                logger.info(f"Received: {data}")
+                logger.info(f"Received: data")
                 # Process the data (e.g., store in a database, write to a file, etc.)
+
             except Exception as e:
                 logger.error(f"Error processing message: {e}")
     finally:
