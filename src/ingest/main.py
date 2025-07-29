@@ -1,4 +1,4 @@
-from fetchers import citibike, weather, mta
+from src.ingest.fetchers import citibike, weather, mta
 from aiohttp import ClientSession
 import yaml
 from aiokafka import AIOKafkaProducer
