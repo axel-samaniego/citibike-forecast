@@ -4,6 +4,7 @@ import json
 import gzip
 import logging
 from dotenv import load_dotenv
+from datetime import datetime
 import os
 
 load_dotenv()
@@ -43,6 +44,14 @@ async def consume():
                 data = json.loads(decompressed)
                 logger.info(f"Received data from topic: {msg.topic}")
                 # Process the data (e.g., store in a database, write to a file, etc.)
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"{msg.topic}_{timestamp}.json"
+                save_dir = os.path.join(SAVE_PATH, msg.topic)
+                os.makedirs(save_dir, exist_ok=True)
+
+                filepath = os.path.join(save_dir, filename)
+                with open(filepath, "w") as f:
+                    json.dump(data, f, indent=2)
 
             except Exception as e:
                 logger.error(
