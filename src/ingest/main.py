@@ -4,6 +4,12 @@ import yaml
 from aiokafka import AIOKafkaProducer
 import asyncio
 import logging
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+KAFKA_BROKER = os.getenv("KAFKA_BROKER")
 
 # Configure logging
 logging.basicConfig(
@@ -26,13 +32,16 @@ FETCHER_MAP = {
 async def main():
     feeds = yaml.safe_load(open("src/ingest/feeds.yaml", "r"))
     feeds = feeds["feeds"]
-    async with ClientSession() as session, AIOKafkaProducer() as producer:
+    async with ClientSession() as session, AIOKafkaProducer(
+        bootstrap_servers=KAFKA_BROKER
+    ) as producer:
+        tasks = []
         for feed in feeds:
-            try:
-                fetcher = FETCHER_MAP[feed["type"]]
-                await fetcher(feed, session, producer)
-            except Exception as e:
-                logger.error(f"Error in {feed['name']}: {e}")
+            fetcher = FETCHER_MAP[feed["type"]]
+            task = asyncio.create_task(fetcher(feed, session, producer))
+            tasks.append(task)
+
+        await asyncio.gather(*tasks)
 
     session.close()
     producer.close()

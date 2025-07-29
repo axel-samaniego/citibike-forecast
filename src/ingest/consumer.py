@@ -41,11 +41,13 @@ async def consume():
                 decompressed = gzip.decompress(msg.value)
                 # Parse the JSON data
                 data = json.loads(decompressed)
-                logger.info(f"Received: data")
+                logger.info(f"Received data from topic: {msg.topic}")
                 # Process the data (e.g., store in a database, write to a file, etc.)
 
             except Exception as e:
-                logger.error(f"Error processing message: {e}")
+                logger.error(
+                    f"Error processing message for topic: {msg.topic}: \n error: {e}"
+                )
     finally:
         await consumer.stop()
 
