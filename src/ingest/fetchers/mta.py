@@ -37,7 +37,7 @@ async def poll(feed_cfg, session: ClientSession, producer: AIOKafkaProducer):
                 r = await session.get(url, timeout=5)
                 content = await r.read()
                 payload = json.loads(content.decode())["entity"]
-            payload = gzip.compress(payload)
+            payload = gzip.compress(json.dumps(payload).encode())
             await producer.send_and_wait(
                 topic=feed_cfg["topic"],
                 key=feed_cfg["name"].encode(),
