@@ -41,7 +41,7 @@ async def poll(feed_cfg, session: ClientSession, producer: AIOKafkaProducer):
                 value=payload,
                 timestamp_ms=int(t0 * 1000),
             )
-            logger.info(f"Successfully fetched and sent data for {bourough}")
+            logger.info(f"Successfully fetched and sent data for all bouroughs")
         except Exception as e:
             logger.error(f"Error in {feed_cfg['name']}: {e}")
         finally:

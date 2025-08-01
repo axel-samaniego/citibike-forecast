@@ -31,8 +31,8 @@ async def poll(feed_cfg, session: ClientSession, producer: AIOKafkaProducer):
                     content = await r.read()
                     feed = gtfs_realtime_pb2.FeedMessage()
                     feed.ParseFromString(content)
-                    payload = protobuf_to_dict(feed)
-                    payload[LINE_MAP[line]] = payload["entity"]
+                    feed_dict = protobuf_to_dict(feed)
+                    payload[LINE_MAP[line]] = feed_dict["entity"]
             else:
                 r = await session.get(url, timeout=5)
                 content = await r.read()
