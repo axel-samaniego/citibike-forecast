@@ -26,13 +26,13 @@ async def poll(feed_cfg, session: ClientSession, producer: AIOKafkaProducer):
             url = feed_cfg["url"]
             if feed_cfg["name"] == "mta_subway_lines":
                 payload = {}
-                for line in LINE_MAP.keys():
+                for line, label in LINE_MAP.items():
                     r = await session.get(url.format(line=line), timeout=5)
                     content = await r.read()
                     feed = gtfs_realtime_pb2.FeedMessage()
                     feed.ParseFromString(content)
                     feed_dict = protobuf_to_dict(feed)
-                    payload[LINE_MAP[line]] = feed_dict["entity"]
+                    payload[label] = feed_dict["entity"]
             else:
                 r = await session.get(url, timeout=5)
                 content = await r.read()
